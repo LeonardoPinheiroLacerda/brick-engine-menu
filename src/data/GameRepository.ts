@@ -1,4 +1,4 @@
-import { GameEntry } from "brick-engine-js";
+import { GameEntry } from "../types/interfaces";
 
 export default class GameRepository {
   private _games: GameEntry[] = [{ id: "loading", name: "Loading", url: "" }];

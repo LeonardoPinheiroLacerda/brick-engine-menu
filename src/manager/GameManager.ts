@@ -1,10 +1,10 @@
 import {
   Game,
-  GameEntry,
   setActiveGame,
   ControlKey,
   ControlEventType,
 } from "brick-engine-js";
+import { GameEntry } from "../types/interfaces";
 import GameMenuSingleton from "../core/GameMenuSingleton";
 
 export default class GameManager {
