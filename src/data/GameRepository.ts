@@ -1,9 +1,7 @@
 import { GameEntry } from "brick-engine-js";
 
 export default class GameRepository {
-  private _games: GameEntry[] = [
-    { id: "loading", name: "Loading...", url: "" },
-  ];
+  private _games: GameEntry[] = [{ id: "loading", name: "Loading", url: "" }];
 
   constructor() {
     this.fetchGames();

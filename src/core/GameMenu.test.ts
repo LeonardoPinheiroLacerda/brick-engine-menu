@@ -5,7 +5,7 @@ import p5 from "p5";
 import { GameView, ControlEventType, ControlKey } from "brick-engine-js";
 
 // Mock GameRepository to avoid external dependencies
-vi.mock("./GameRepository", () => {
+vi.mock("../data/GameRepository", () => {
   return {
     default: vi.fn().mockImplementation(function () {
       return {
@@ -19,7 +19,7 @@ vi.mock("./GameRepository", () => {
 });
 
 // Mock GameManager
-vi.mock("./manager/GameManager", () => {
+vi.mock("../manager/GameManager", () => {
   return {
     default: vi.fn().mockImplementation(function () {
       return {

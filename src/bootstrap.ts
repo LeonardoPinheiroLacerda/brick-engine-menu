@@ -7,8 +7,8 @@ import {
   ControlEventType,
 } from "brick-engine-js";
 import p5 from "p5";
-import GameMenu from "./GameMenu";
-import GameMenuSingleton from "./GameMenuSingleton";
+import GameMenu from "./core/GameMenu";
+import GameMenuSingleton from "./core/GameMenuSingleton";
 
 (window as any).BrickEngine = BrickEngine;
 (window as any).p5 = p5;
@@ -68,16 +68,12 @@ const _switchHandler = (newGame: Game) => {
 
 const p5Instance = bootstrap(GameMenu);
 
-// After bootstrap, we need to find the instance and set the handler.
-// Since bootstrap returns the p5 instance and internally creates the game,
-// and our GameMenu constructor sets itself in GameMenuSingleton, we can get it from there.
-
-setTimeout(() => {
-  if (GameMenuSingleton.hasInstance()) {
-    const menu = GameMenuSingleton.getInstance();
-    _game = menu;
-    menu.setSwitchHandler(_switchHandler);
-  }
-}, 0);
+// When the GameMenu is instantiated, it will be available in the singleton.
+// We need to set the switch handler to the menu instance.
+if (GameMenuSingleton.hasInstance()) {
+  const menu = GameMenuSingleton.getInstance();
+  _game = menu;
+  menu.setSwitchHandler(_switchHandler);
+}
 
 export default p5Instance;

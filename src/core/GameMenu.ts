@@ -10,8 +10,8 @@ import {
   Sound,
   StateProperty,
 } from "brick-engine-js";
-import GameRepository from "./GameRepository";
-import GameManager from "./manager/GameManager";
+import GameRepository from "../data/GameRepository";
+import GameManager from "../manager/GameManager";
 import GameMenuSingleton from "./GameMenuSingleton";
 
 export default class GameMenu extends Game {
