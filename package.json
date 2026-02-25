@@ -16,7 +16,8 @@
     "serve": "npx http-server ./dist --cors"
   },
   "dependencies": {
-    "brick-engine-js": "file:../brick-engine",
+    "brick-engine": "^0.12.1",
+    "brick-engine-js": "^1.0.15",
     "dotenv": "^17.3.1",
     "p5": "^2.2.0"
   },

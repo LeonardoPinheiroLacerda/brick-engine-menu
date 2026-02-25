@@ -28,7 +28,9 @@ export default class GameMenu extends Game {
   }
 
   setupGame() {
-    const { state, control, sound } = this.modules;
+    const { state, control, sound, session } = this.modules;
+
+    session.setSessionEnabled(false);
 
     control.subscribe(ControlKey.ACTION, ControlEventType.PRESSED, () => {
       if (this._isLoading) return;
