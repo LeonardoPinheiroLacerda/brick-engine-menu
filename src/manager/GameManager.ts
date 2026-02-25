@@ -13,10 +13,7 @@ export default class GameManager {
       await this._loadGameScript(entry.url);
 
       if (window.BrickEngineGame) {
-        const gameInstance = new window.BrickEngineGame(
-          actualGame.p,
-          actualGame.view,
-        );
+        const gameInstance = new window.BrickEngineGame(actualGame.view);
 
         // Set properly the Game ID using the GameRepository fetch ID
         gameInstance.gameId = entry.id;

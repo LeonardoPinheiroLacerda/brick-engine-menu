@@ -21,8 +21,8 @@ export default class GameMenu extends Game {
   private _gameRepository = new GameRepository();
   private _gameManager = new GameManager();
 
-  constructor(p: p5, view: GameView) {
-    super(p, view);
+  constructor(view: GameView) {
+    super(view);
     this.gameId = "game-menu";
     GameMenuSingleton.setInstance(this);
   }
