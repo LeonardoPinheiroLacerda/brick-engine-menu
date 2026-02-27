@@ -1,0 +1,824 @@
+/* MAIN BODY */
+
+#brick-game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#container {
+    width: var(--width);
+    height: var(--height);
+
+    background-color: var(--main-color);
+
+    border-radius: var(--border-radius);
+    border: var(--border);
+
+    box-sizing: border-box;
+    margin: auto;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow:
+        calc(var(--width) * -0.03) calc(var(--width) * 0.03) var(--dispersion) black,
+        calc(var(--width) * -0.02) calc(var(--width) * 0.02) var(--dispersion) var(--color-shadow-reflexion) inset,
+        calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow) inset;
+}
+
+#brick-game-canvas {
+    border: var(--border);
+    box-shadow:
+        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow-reflexion);
+}
+
+/* FRAME */
+
+#frame {
+    border: var(--border);
+    border-radius: var(--border-radius);
+
+    position: relative;
+
+    width: calc(var(--width) * 0.85);
+    height: auto;
+    aspect-ratio: 9/10;
+    margin: 7.5%;
+    margin-bottom: 3.75%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#frame div {
+    position: absolute;
+    top: calc(var(--height) * -0.02);
+    left: 27.5%;
+
+    width: 45%;
+    height: calc(var(--height) * 0.03);
+
+    background-color: var(--main-color);
+
+    display: flex;
+    justify-content: center;
+
+    padding-top: calc(var(--height) * 0.005);
+    padding-bottom: 0;
+}
+
+#frame p {
+    text-align: center;
+
+    font-family: 'retro-gamming';
+    font-weight: bold;
+    font-size: calc(var(--height) * 0.03);
+
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--color-shadow-reflexion);
+}
+
+/* BUTTONS */
+
+.sm-btn,
+.btn,
+.lg-btn {
+    z-index: 999;
+}
+
+.sm-btn {
+    box-shadow:
+        calc(var(--width) * -0.0075) calc(var(--width) * 0.0075) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--button-color-reflexion) inset;
+}
+
+.sm-btn:active {
+    box-shadow:
+        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) var(--dispersion) var(--button-color-reflexion) inset;
+    transform: translateX(calc(var(--width) * -0.0025)) translateY(calc(var(--width) * 0.0025));
+}
+
+.btn {
+    box-shadow:
+        calc(var(--width) * -0.015) calc(var(--width) * 0.015) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.0175) calc(var(--width) * 0.0175) var(--dispersion) var(--button-color-reflexion) inset;
+}
+
+.btn:active {
+    box-shadow:
+        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) var(--dispersion) var(--button-color-reflexion) inset;
+    transform: translateX(calc(var(--width) * -0.005)) translateY(calc(var(--width) * 0.005));
+}
+
+.lg-btn {
+    box-shadow:
+        calc(var(--width) * -0.02) calc(var(--width) * 0.02) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.0175) calc(var(--width) * 0.0175) var(--dispersion) var(--button-color-reflexion) inset;
+}
+
+.lg-btn:active {
+    box-shadow:
+        calc(var(--width) * -0.005) calc(var(--width) * 0.005) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--button-color-reflexion) inset;
+    transform: translateX(calc(var(--width) * -0.0075)) translateY(calc(var(--width) * 0.0075));
+}
+
+.sm-btn-p,
+.btn-p,
+.lg-btn-p {
+    font-family: 'retro-gamming';
+    color: white;
+    text-align: center;
+
+    user-select: none;
+}
+
+.sm-btn-container,
+.btn-container,
+.lg-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sm-btn,
+.btn,
+.lg-btn {
+    outline: none;
+
+    border-radius: 50%;
+    border: var(--button-border);
+
+    transition-property: transform box-shadow;
+    transition-duration: var(--button-animation-duration);
+
+    background-color: var(--button-color);
+}
+
+.sm-btn-container {
+    flex-direction: column;
+}
+
+.sm-btn {
+    width: var(--sm-button-size);
+    height: var(--sm-button-size);
+}
+
+.sm-btn-p {
+    font-family: 'retro-gamming';
+    color: white;
+    text-align: center;
+
+    user-select: none;
+
+    font-size: calc(var(--width) * 0.03);
+
+    /* width: calc(var(--width) * 0.08); */
+    margin-top: calc(var(--width) * 0.01);
+
+    line-height: calc(var(--width) * 0.03);
+    height: calc(var(--width) * 0.06);
+
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--color-shadow-reflexion);
+}
+
+.btn-container {
+    flex-direction: column-reverse;
+}
+
+.btn {
+    width: var(--button-size);
+    height: var(--button-size);
+}
+
+.btn-p {
+    font-weight: bold;
+    font-size: calc(var(--width) * 0.04);
+    margin-bottom: calc(var(--width) * 0.015);
+    line-height: calc(var(--width) * 0.03);
+}
+
+.lg-btn-container {
+    flex-direction: column;
+}
+
+.lg-btn {
+    width: var(--lg-button-size);
+    height: var(--lg-button-size);
+}
+
+.lg-btn-p {
+    font-weight: bold;
+    font-size: calc(var(--width) * 0.05);
+    margin-bottom: calc(var(--width) * 0.015);
+    line-height: calc(var(--width) * 0.03);
+}
+
+.btn,
+.lg-btn {
+    font-family: 'retro-gamming';
+    font-size: calc(var(--width) * 0.045);
+    font-weight: bold;
+    color: white;
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--button-color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--button-color-reflexion);
+}
+
+/* BUTTON CONTAINERS */
+
+#button-container,
+#small-button-container,
+#inner-button-container,
+#medium-button-container,
+#large-button-container {
+    width: 100%;
+    height: auto;
+}
+
+#button-container {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+#small-button-container {
+    display: flex;
+    flex-grow: 0.1;
+    justify-content: space-evenly;
+
+    max-height: 150px;
+
+    position: relative;
+}
+
+.sm-btn-container-top {
+    position: relative;
+    top: -20%;
+}
+
+.sm-btn-container-bottom {
+    position: relative;
+    bottom: -20%;
+}
+
+#inner-button-container {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+#medium-button-container {
+    display: flex;
+    flex-shrink: 1;
+
+    position: relative;
+}
+
+#large-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 1.5;
+}
+
+#direction-vertical-container,
+#direction-horizontal-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--width) * 0.115);
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#direction-vertical-container {
+    flex-direction: column;
+}
+
+#direction-horizontal-container {
+    flex-direction: row;
+}
+
+#debugger {
+    font-family: 'retro-gamming', monospace;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #0f0; /* Green phosphor */
+    border: 2px solid #0f0;
+    box-shadow: 0 0 10px #0f0;
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 300px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    user-select: none;
+    -webkit-user-select: none;
+    z-index: 9999;
+    font-size: 14px;
+    /* text-shadow: 0 0 2px #0f0; */
+}
+
+/* Custom Scrollbar */
+#debugger::-webkit-scrollbar {
+    width: 8px;
+}
+
+#debugger::-webkit-scrollbar-track {
+    background: #001100;
+}
+
+#debugger::-webkit-scrollbar-thumb {
+    background: #0f0;
+    border-radius: 4px;
+}
+
+#debugger::-webkit-scrollbar-thumb:hover {
+    background: #0a0;
+}
+
+/* Summary / Header */
+#debugger-summary {
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    /* text-transform: uppercase; */
+    border-bottom: 1px dashed #0f0;
+    padding-bottom: 5px;
+    list-style: none;
+}
+
+/* Module Sections */
+.debugger-module {
+    margin-bottom: 10px;
+    border-left: 1px solid #004400;
+    padding-left: 8px;
+}
+
+.debugger-module-summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #cfc;
+    margin-bottom: 4px;
+}
+
+.debugger-module-summary:hover {
+    color: #fff;
+    /* text-shadow: 0 0 4px #fff; */
+}
+
+/* Data Rows */
+.debugger-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+    border-bottom: 1px dotted #003300;
+}
+
+/* Closed State */
+#debugger:not([open]) {
+    width: auto;
+    height: auto;
+    max-height: none;
+    padding: 5px 10px;
+    border: 1px solid #0f0;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: none;
+}
+
+#debugger:not([open]) #debugger-summary {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.debugger-container:hover {
+    background-color: rgba(0, 255, 0, 0.05);
+}
+
+.debugger-container.highlight {
+    background-color: transparent;
+    color: #fff;
+    /* text-shadow: 0 0 5px #fff; */
+    border-bottom: 1px solid #fff;
+}
+
+.debugger-container.highlight span {
+    color: #fff;
+}
+
+.debugger-container p {
+    margin: 0;
+    opacity: 0.8;
+}
+
+.debugger-container span {
+    font-weight: bold;
+}
+
+#modal-background {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-background.hidden {
+    display: none;
+}
+
+#session-modal {
+    width: 80%;
+    max-width: 500px;
+    height: 44%;
+    max-height: 360px;
+    min-width: 320px;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 1rem 0;
+
+    background-color: var(--main-color);
+
+    border-radius: var(--border-radius);
+    border: var(--border);
+
+    box-shadow:
+        calc(var(--width) * -0.03) calc(var(--width) * 0.03) var(--dispersion) black,
+        calc(var(--width) * -0.02) calc(var(--width) * 0.02) var(--dispersion) var(--color-shadow-reflexion) inset,
+        calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow) inset;
+}
+
+#session-modal-frame {
+    border: var(--border);
+    border-radius: var(--border-radius);
+
+    position: relative;
+
+    width: 90%;
+    flex: 1;
+    margin: 1rem 0;
+    min-height: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#session-modal-frame > p {
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+
+    text-align: center;
+
+    font-family: 'retro-gamming';
+    font-weight: bold;
+    font-size: clamp(1rem, calc(var(--height) * 0.03), 1.4rem);
+
+    background-color: var(--main-color);
+    padding: 0 calc(var(--width) * 0.02);
+
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--color-shadow-reflexion);
+}
+
+#session-modal-screen {
+    width: 90%;
+    height: 80%;
+
+    border: var(--border);
+    box-shadow:
+        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow-reflexion);
+
+    background-image: url('../images/cell.svg');
+    background-size: 3.7%;
+    background-repeat: repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#session-modal-screen > p {
+    text-align: center;
+
+    font-family: 'retro-gamming';
+    font-size: 1.5rem;
+
+    padding: 0 calc(var(--width) * 0.02);
+}
+
+#session-modal-screen > p > span {
+    font-size: 1.8rem;
+    padding: 0 calc(var(--width) * 0.02);
+}
+
+#session-modal-buttons {
+    width: 100%;
+    padding-bottom: 0.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: clamp(1rem, 5vw, 2.5rem);
+}
+
+.session-modal-button:active {
+    box-shadow:
+        calc(var(--width) * -0.005) calc(var(--width) * 0.005) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--button-color-reflexion) inset;
+    transform: translate(calc(var(--width) * -0.005), calc(var(--width) * 0.005));
+}
+
+.session-modal-button {
+    width: 35%;
+    max-width: 150px;
+    padding: 0.8rem 0;
+
+    border: var(--border);
+    border-radius: var(--border-radius);
+
+    background-color: var(--button-color);
+    box-shadow:
+        calc(var(--width) * -0.015) calc(var(--width) * 0.015) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.0175) calc(var(--width) * 0.0175) var(--dispersion) var(--button-color-reflexion) inset;
+
+    font-family: 'retro-gamming';
+    color: white;
+    text-align: center;
+
+    user-select: none;
+
+    font-size: 1rem;
+
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--button-color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--button-color-reflexion);
+
+    transition:
+        transform var(--button-animation-duration),
+        box-shadow var(--button-animation-duration);
+}
+
+#source-code {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+}
+
+#controls {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+}
+
+#source-code,
+#controls {
+    background-color: var(--main-color);
+    padding: 0.75rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    box-sizing: content-box;
+}
+
+#source-code > #source-code-button,
+#controls > #controls-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#source-code > #source-code-button > img,
+#controls > #controls-button > img {
+    width: 2.5rem;
+    filter: invert();
+}
+#source-code:hover,
+#controls:hover {
+    background-color: var(--color-shadow-reflexion);
+}
+#source-code:active,
+#controls:active {
+    filter: brightness(1.15);
+}
+
+#source-code::after,
+#controls::after {
+    font-family: 'retro-gamming';
+    padding: 0.5rem;
+    width: 6rem;
+    background-color: white;
+    text-align: center;
+    border-radius: 0.25rem;
+    border: 1px black solid;
+    box-shadow: 0.25rem 0.25rem black;
+    opacity: 0;
+    transition: 0.25s opacity;
+}
+
+#source-code:hover::after,
+#controls:hover::after {
+    opacity: 1;
+}
+
+#source-code::after {
+    content: 'source code';
+    position: absolute;
+    top: 75px;
+    left: -65px;
+}
+
+#controls::after {
+    content: 'Controls';
+    position: absolute;
+    top: 75px;
+    left: 15px;
+}
+
+#splash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.85;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@font-face {
+    font-family: retro-gamming;
+    src: url(./../fonts/digital-7.monoitalic.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+    user-select: none;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgb(0, 158, 247);
+    background: linear-gradient(300deg, rgb(48, 179, 255) 0%, rgba(0, 158, 247, 1) 100%);
+}
+
+#version {
+    font-family: 'retro-gamming';
+    font-size: 1rem;
+    color: white;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+    #source-code,
+    #controls {
+        display: none;
+    }
+
+    body,
+    #container {
+        width: 100% !important;
+        height: 100vh !important;
+        /* height: 100dvh !important; */
+        border-radius: 0px !important;
+    }
+
+    #frame > canvas {
+        width: 85% !important;
+        height: auto !important;
+        aspect-ratio: 9/10 !important;
+    }
+
+    #frame {
+        width: 85% !important;
+        padding: 7.5%¨ !important;
+    }
+
+    #small-button-container {
+        margin-top: 3.5%;
+    }
+    #direction-vertical-container,
+    #direction-horizontal-container {
+        gap: calc(var(--width) * 0.13);
+    }
+
+    #large-button-container {
+        flex-shrink: 1.75;
+    }
+
+    .sm-btn {
+        width: var(--sm-button-size-mobile) !important;
+        height: var(--sm-button-size-mobile) !important;
+    }
+
+    .btn {
+        width: var(--button-size-mobile) !important;
+        height: var(--button-size-mobile) !important;
+        margin: var(--button-size-mobile-spacing) !important;
+        font-size: var(--button-size-mobile-font-size) !important;
+    }
+
+    .lg-btn {
+        width: var(--lg-button-size-mobile) !important;
+        height: var(--lg-button-size-mobile) !important;
+        font-size: var(--lg-button-size-mobile-font-size) !important;
+    }
+
+    .sm-btn-p {
+        font-size: var(--sm-button-size-mobile-font-size) !important;
+        line-height: var(--sm-button-size-mobile-line-height) !important;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+    #wasd {
+        width: 10.5rem !important;
+    }
+
+    .key {
+        width: 3rem !important;
+    }
+
+    .key-description {
+        font-size: 1.5rem !important;
+    }
+
+    .command {
+        gap: 0.5rem !important;
+    }
+}
+
+@media only screen and (max-width: 815px) {
+    #controls-tutorial {
+        gap: 0rem;
+        flex-direction: column !important;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .key-description {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #wasd {
+        width: 9rem !important;
+    }
+
+    .key {
+        width: 2.5rem !important;
+    }
+    .key-description {
+        font-size: 1rem !important;
+    }
+}
+
+
+
