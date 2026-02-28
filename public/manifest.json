@@ -1,19 +1,19 @@
 {
   "name": "Brick Engine",
   "short_name": "Brick Engine",
-  "start_url": "/brick-engine-menu/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/192xicon.png",
+      "src": "192xicon.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/512xicon.png",
+      "src": "512xicon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
