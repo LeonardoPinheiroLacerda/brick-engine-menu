@@ -1,4 +1,3 @@
-import p5 from "p5";
 import {
   Game,
   GameView,
@@ -23,11 +22,12 @@ export default class GameMenu extends Game {
 
   constructor(view: GameView) {
     super(view);
-    this.gameId = "game-menu";
     GameMenuSingleton.setInstance(this);
   }
 
   setupGame() {
+    this.gameId = "game-menu";
+
     const { state, control, sound, session } = this.modules;
 
     session.setSessionEnabled(false);

@@ -115,6 +115,26 @@ export default (env = {}, argv) => {
           { from: path.resolve(engineRoot, "dist/images"), to: "images" },
           { from: path.resolve(engineRoot, "dist/sounds"), to: "sounds" },
           { from: path.resolve(engineRoot, "dist/fonts"), to: "fonts" },
+          // {
+          //   from: path.resolve(__dirname, "public/CNAME"),
+          //   to: "CNAME",
+          //   toType: "file",
+          // },
+          {
+            from: path.resolve(__dirname, "public/manifest.json"),
+            to: "manifest.json",
+            toType: "file",
+          },
+          {
+            from: path.resolve(__dirname, "public/192xicon.png"),
+            to: "192xicon.png",
+            toType: "file",
+          },
+          {
+            from: path.resolve(__dirname, "public/512xicon.png"),
+            to: "512xicon.png",
+            toType: "file",
+          },
         ],
       }),
     );
