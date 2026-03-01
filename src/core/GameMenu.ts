@@ -132,8 +132,19 @@ export default class GameMenu extends Game {
     text.textOnDisplay("Wellcome to your", { x: 0.5, y: 0.25 });
     text.textOnDisplay("favorite brick game", { x: 0.5, y: 0.32 });
     text.textOnDisplay("simulator!", { x: 0.5, y: 0.39 });
-    text.textOnDisplay("Press start", { x: 0.5, y: 0.66 });
-    text.textOnDisplay("to continue.", { x: 0.5, y: 0.72 });
+
+    text.setTextSize(FontSize.MEDIUM);
+
+    text.pulsingTextOnDisplay(
+      "Press start",
+      { x: 0.5, y: 0.64 },
+      this.modules.time.elapsedTime,
+    );
+    text.pulsingTextOnDisplay(
+      "to continue.",
+      { x: 0.5, y: 0.72 },
+      this.modules.time.elapsedTime,
+    );
 
     this.p.pop();
   }
