@@ -135,16 +135,8 @@ export default class GameMenu extends Game {
 
     text.setTextSize(FontSize.MEDIUM);
 
-    text.writePulsingTextOnDisplay(
-      "Press start",
-      { x: 0.5, y: 0.64 },
-      this.modules.time.elapsedTime,
-    );
-    text.writePulsingTextOnDisplay(
-      "to continue.",
-      { x: 0.5, y: 0.72 },
-      this.modules.time.elapsedTime,
-    );
+    text.writePulsingTextOnDisplay("Press start", { x: 0.5, y: 0.64 });
+    text.writePulsingTextOnDisplay("to continue.", { x: 0.5, y: 0.72 });
 
     this.p.pop();
   }
