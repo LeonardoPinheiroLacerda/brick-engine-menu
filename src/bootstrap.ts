@@ -8,7 +8,6 @@ const vConsole = new VConsole();
 
 try {
   (window as any).BrickEngine = BrickEngine;
-  (window as any).p5 = p5;
 } catch (error) {
   console.error(error);
 }
