@@ -1,9 +1,9 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.brickengine.menu',
-  appName: 'brick-engine-menucom.brickengine.menudist',
-  webDir: 'dist'
+  appId: 'com.brickengine.hub',
+  appName: 'brick-engine-menu',
+  webDir: 'www'
 };
 
 export default config;
