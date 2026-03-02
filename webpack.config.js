@@ -109,6 +109,7 @@ export default (env = {}, argv) => {
 
   if (bundleMode === "standalone") {
     delete config.externals["brick-engine-js"];
+    delete config.externals["p5"];
 
     // Plugins only for standalone mode
     config.plugins.push(
