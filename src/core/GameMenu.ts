@@ -86,22 +86,22 @@ export default class GameMenu extends Game {
     text.setActiveText();
     text.setTextAlign(FontAlign.CENTER, FontVerticalAlign.BOTTOM);
 
-    text.textOnDisplay("Menu", { x: 0.5, y: 0.15 });
+    text.writeOnDisplay("Menu", { x: 0.5, y: 0.15 });
 
     text.setTextSize(FontSize.SMALL);
 
-    text.textOnDisplay("Choose a game and", { x: 0.5, y: 0.25 });
-    text.textOnDisplay("Press action to play", { x: 0.5, y: 0.32 });
+    text.writeOnDisplay("Choose a game and", { x: 0.5, y: 0.25 });
+    text.writeOnDisplay("Press action to play", { x: 0.5, y: 0.32 });
 
     text.setTextAlign(FontAlign.RIGHT, FontVerticalAlign.BOTTOM);
-    text.textOnDisplay("<", { x: 0.1, y: 0.54 });
+    text.writeOnDisplay("<", { x: 0.1, y: 0.54 });
 
     text.setTextAlign(FontAlign.LEFT, FontVerticalAlign.BOTTOM);
-    text.textOnDisplay(">", { x: 0.9, y: 0.54 });
+    text.writeOnDisplay(">", { x: 0.9, y: 0.54 });
 
     text.setTextSize(FontSize.MEDIUM);
     text.setTextAlign(FontAlign.CENTER, FontVerticalAlign.BOTTOM);
-    text.textOnDisplay(
+    text.writeOnDisplay(
       this._gameRepository.games[this._gameSelectionPointer].name,
       { x: 0.5, y: 0.55 },
     );
@@ -109,9 +109,9 @@ export default class GameMenu extends Game {
     text.setTextSize(FontSize.EXTRA_SMALL);
     text.setTextAlign(FontAlign.LEFT, FontVerticalAlign.BOTTOM);
 
-    text.textOnDisplay("Left:    Previous option", { x: 0.05, y: 0.78 });
-    text.textOnDisplay("Right:   Next option", { x: 0.05, y: 0.84 });
-    text.textOnDisplay("Action:  Select", { x: 0.05, y: 0.9 });
+    text.writeOnDisplay("Left:    Previous option", { x: 0.05, y: 0.78 });
+    text.writeOnDisplay("Right:   Next option", { x: 0.05, y: 0.84 });
+    text.writeOnDisplay("Action:  Select", { x: 0.05, y: 0.9 });
 
     p.pop();
   }
@@ -125,22 +125,22 @@ export default class GameMenu extends Game {
     text.setActiveText();
     text.setTextAlign(FontAlign.CENTER, FontVerticalAlign.TOP);
 
-    text.textOnDisplay("Menu", { x: 0.5, y: 0.15 });
+    text.writeOnDisplay("Menu", { x: 0.5, y: 0.15 });
 
     text.setTextSize(FontSize.SMALL);
 
-    text.textOnDisplay("Wellcome to your", { x: 0.5, y: 0.25 });
-    text.textOnDisplay("favorite brick game", { x: 0.5, y: 0.32 });
-    text.textOnDisplay("simulator!", { x: 0.5, y: 0.39 });
+    text.writeOnDisplay("Wellcome to your", { x: 0.5, y: 0.25 });
+    text.writeOnDisplay("favorite brick game", { x: 0.5, y: 0.32 });
+    text.writeOnDisplay("simulator!", { x: 0.5, y: 0.39 });
 
     text.setTextSize(FontSize.MEDIUM);
 
-    text.pulsingTextOnDisplay(
+    text.writePulsingTextOnDisplay(
       "Press start",
       { x: 0.5, y: 0.64 },
       this.modules.time.elapsedTime,
     );
-    text.pulsingTextOnDisplay(
+    text.writePulsingTextOnDisplay(
       "to continue.",
       { x: 0.5, y: 0.72 },
       this.modules.time.elapsedTime,
