@@ -60,6 +60,7 @@ export default (env = {}, argv) => {
           terserOptions: {
             keep_classnames: true,
             keep_fnames: true,
+            mangle: false, // Completely disable mangling for ancient WebViews
           },
         }),
       ],
