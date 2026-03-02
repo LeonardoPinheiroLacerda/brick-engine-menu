@@ -4,6 +4,7 @@ import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
+import TerserPlugin from "terser-webpack-plugin";
 import { createRequire } from "module";
 import fs from "fs";
 import dotenv from "dotenv";
@@ -51,6 +52,17 @@ export default (env = {}, argv) => {
       filename: "game.bundle.js",
       path: path.resolve(__dirname, "dist"),
       clean: true,
+    },
+    optimization: {
+      minimize: isProduction,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            keep_classnames: true,
+            keep_fnames: true,
+          },
+        }),
+      ],
     },
     devtool: isProduction ? false : "source-map",
     module: {
