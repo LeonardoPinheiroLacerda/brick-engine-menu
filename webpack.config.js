@@ -115,6 +115,7 @@ export default (env = {}, argv) => {
           { from: path.resolve(engineRoot, "dist/images"), to: "images" },
           { from: path.resolve(engineRoot, "dist/sounds"), to: "sounds" },
           { from: path.resolve(engineRoot, "dist/fonts"), to: "fonts" },
+          { from: path.resolve(engineRoot, "dist/docs"), to: "docs" },
           // {
           //   from: path.resolve(__dirname, "public/CNAME"),
           //   to: "CNAME",
