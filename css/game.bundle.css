@@ -942,9 +942,9 @@ body {
 
 @media only screen and (max-width: 600px) {
     #container {
-        width: 99.5% !important;
-        height: calc(99.5% - 50px) !important;
-        margin: 0.25% !important;
+        width: 99% !important;
+        height: calc(100% - 20px) !important;
+        margin: 0.5% !important;
 
         overflow-y: hidden !important;
         touch-action: none !important;
