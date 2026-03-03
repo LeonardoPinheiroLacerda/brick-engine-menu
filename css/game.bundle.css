@@ -45,7 +45,7 @@
 
     position: relative;
 
-    width: calc(var(--width) * 0.85);
+    width: calc(var(--width) * 0.83);
     height: auto;
     aspect-ratio: 9/10;
     margin: 7.5%;
@@ -942,16 +942,12 @@ body {
 
 @media only screen and (max-width: 600px) {
     #container {
-        width: 95% !important;
-        height: calc(100% - 40px) !important;
-        margin: 2.5% !important;
+        width: 99% !important;
+        height: calc(100% - 30px) !important;
+        margin: 0.5% !important;
 
         overflow-y: hidden !important;
         touch-action: none !important;
-    }
-
-    #frame {
-        width: 85% !important;
     }
 
     #session-modal-screen p {
