@@ -321,79 +321,87 @@
 
 #debugger {
     font-family: 'retro-gamming', monospace;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #0f0; /* Green phosphor */
-    border: 2px solid #0f0;
-    box-shadow: 0 0 10px #0f0;
-    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    border: var(--border);
+    border-radius: var(--border-radius);
+    padding: 0; /* Removed container padding */
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 300px;
+    width: 320px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     user-select: none;
     -webkit-user-select: none;
     z-index: 9999;
     font-size: 14px;
-    /* text-shadow: 0 0 2px #0f0; */
+    box-shadow:
+        calc(var(--width) * -0.015) calc(var(--width) * 0.015) var(--dispersion) black,
+        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--color-shadow-reflexion) inset,
+        calc(var(--width) * 0.005) calc(var(--width) * -0.005) var(--dispersion) var(--color-shadow) inset;
 }
 
-/* Custom Scrollbar */
+#debugger-summary {
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 15px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    text-shadow: 1px 1px var(--color-shadow);
+    outline: none;
+    text-align: center;
+}
+
+#debugger[open] #debugger-summary {
+    margin-bottom: 10px;
+    border-bottom: 1px dashed white;
+}
+
+/* Custom Scrollbar to match retro look */
 #debugger::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 #debugger::-webkit-scrollbar-track {
-    background: #001100;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 #debugger::-webkit-scrollbar-thumb {
-    background: #0f0;
-    border-radius: 4px;
-}
-
-#debugger::-webkit-scrollbar-thumb:hover {
-    background: #0a0;
-}
-
-/* Summary / Header */
-#debugger-summary {
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    /* text-transform: uppercase; */
-    border-bottom: 1px dashed #0f0;
-    padding-bottom: 5px;
-    list-style: none;
+    background: var(--button-color);
+    border-radius: 3px;
 }
 
 /* Module Sections */
 .debugger-module {
-    margin-bottom: 10px;
-    border-left: 1px solid #004400;
+    margin: 0 15px 10px 15px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
     padding-left: 8px;
 }
 
 .debugger-module-summary {
     cursor: pointer;
     font-weight: bold;
-    color: #cfc;
+    color: #eee;
     margin-bottom: 4px;
 }
 
 .debugger-module-summary:hover {
     color: #fff;
-    /* text-shadow: 0 0 4px #fff; */
 }
 
 /* Data Rows */
 .debugger-container {
     display: flex;
     justify-content: space-between;
-    padding: 2px 0;
-    border-bottom: 1px dotted #003300;
+    padding: 4px 6px;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.05);
+    margin-bottom: 2px;
 }
 
 /* Closed State */
@@ -401,9 +409,19 @@
     width: auto;
     height: auto;
     max-height: none;
-    padding: 5px 10px;
-    border: 1px solid #0f0;
-    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0; /* No padding on container */
+    background-color: var(--main-color);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    box-shadow:
+        calc(var(--width) * -0.015) calc(var(--width) * 0.015) var(--dispersion) black,
+        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--color-shadow-reflexion) inset,
+        calc(var(--width) * 0.005) calc(var(--width) * -0.005) var(--dispersion) var(--color-shadow) inset;
+    transition: all 0.2s;
+}
+
+#debugger:not([open]):active {
+    transform: translate(-2px, 2px);
     box-shadow: none;
 }
 
@@ -414,27 +432,27 @@
 }
 
 .debugger-container:hover {
-    background-color: rgba(0, 255, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .debugger-container.highlight {
-    background-color: transparent;
-    color: #fff;
-    /* text-shadow: 0 0 5px #fff; */
-    border-bottom: 1px solid #fff;
-}
-
-.debugger-container.highlight span {
-    color: #fff;
+    background-color: #87cefa; /* LightSkyBlue */
+    color: #000;
 }
 
 .debugger-container p {
     margin: 0;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .debugger-container span {
     font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+    #debugger {
+        display: none !important;
+    }
 }
 
 #modal-background {
@@ -668,6 +686,213 @@
     left: 15px;
 }
 
+#shortcuts-modal-background {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#shortcuts-modal-background.hidden {
+    display: none;
+}
+
+#shortcuts-modal {
+    width: 80%;
+    max-width: 500px;
+    height: auto;
+    max-height: 80vh;
+    min-width: 320px;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 1rem 0;
+
+    background-color: var(--main-color);
+
+    border-radius: var(--border-radius);
+    border: var(--border);
+
+    box-shadow:
+        calc(var(--width) * -0.03) calc(var(--width) * 0.03) var(--dispersion) black,
+        calc(var(--width) * -0.02) calc(var(--width) * 0.02) var(--dispersion) var(--color-shadow-reflexion) inset,
+        calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow) inset;
+}
+
+#shortcuts-modal-frame {
+    border: var(--border);
+    border-radius: var(--border-radius);
+
+    position: relative;
+
+    width: 90%;
+    flex: 1;
+    margin: 1rem 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#shortcuts-modal-frame > h2 {
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+
+    text-align: center;
+
+    font-family: 'retro-gamming';
+    font-weight: bold;
+    font-size: clamp(1rem, calc(var(--height) * 0.03), 1.4rem);
+
+    background-color: var(--main-color);
+    padding: 0 calc(var(--width) * 0.02);
+
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--color-shadow-reflexion);
+}
+
+#shortcuts-modal-screen {
+    width: 84%;
+    height: 80%;
+    margin: 1.5rem 0;
+
+    border: var(--border);
+    box-shadow:
+        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow-reflexion);
+
+    background-image: url('../images/cell.svg');
+    background-size: 3.7%;
+    background-repeat: repeat;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.shortcuts-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+
+.shortcut-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+.shortcut-key {
+    font-family: 'retro-gamming';
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: bold;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.shortcut-action {
+    font-family: 'retro-gamming';
+    font-size: 1.2rem;
+    color: #222;
+}
+
+#close-shortcuts {
+    width: 40%;
+    max-width: 150px;
+    padding: 0.8rem 0;
+    margin-bottom: 0.5rem;
+
+    border: var(--border);
+    border-radius: var(--border-radius);
+
+    background-color: var(--button-color);
+    box-shadow:
+        calc(var(--width) * -0.015) calc(var(--width) * 0.015) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.0175) calc(var(--width) * 0.0175) var(--dispersion) var(--button-color-reflexion) inset;
+
+    font-family: 'retro-gamming';
+    color: white;
+    text-align: center;
+    cursor: pointer;
+
+    font-size: 1rem;
+
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--button-color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--button-color-reflexion);
+
+    transition:
+        transform var(--button-animation-duration),
+        box-shadow var(--button-animation-duration);
+}
+
+#close-shortcuts:active {
+    box-shadow:
+        calc(var(--width) * -0.005) calc(var(--width) * 0.005) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--button-color-reflexion) inset;
+    transform: translate(calc(var(--width) * -0.005), calc(var(--width) * 0.005));
+}
+
+#btn-shortcuts-external {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 0 15px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-color);
+    color: white;
+    border: var(--border);
+    font-family: 'retro-gamming', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 9998;
+    border-radius: var(--border-radius);
+    box-shadow:
+        calc(var(--width) * -0.015) calc(var(--width) * 0.015) var(--dispersion) black,
+        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--color-shadow-reflexion) inset,
+        calc(var(--width) * 0.005) calc(var(--width) * -0.005) var(--dispersion) var(--color-shadow) inset;
+    transition: all 0.2s;
+    text-shadow: 1px 1px var(--color-shadow);
+    box-sizing: border-box;
+}
+
+#btn-shortcuts-external:active {
+    transform: translate(-2px, 2px);
+    box-shadow: none;
+}
+
+/* Hide external trigger and modal on mobile */
+@media only screen and (max-width: 600px) {
+    #shortcuts-modal-background,
+    #btn-shortcuts-external {
+        display: none !important;
+    }
+}
+
 #splash {
     position: absolute;
     top: 0;
@@ -717,13 +942,17 @@ body {
 
 @media only screen and (max-width: 600px) {
     #container {
-        width: 100% !important;
-        height: 100% !important;
+        width: 99.5% !important;
+        height: 99.5% !important;
 
-        border-radius: 0px !important;
-        border: 0px !important;
+        margin: 0.25% !important;
+
         overflow-y: hidden !important;
         touch-action: none !important;
+    }
+
+    #frame {
+        width: calc(var(--width) * 0.84) !important;
     }
 
     #session-modal-screen p {
