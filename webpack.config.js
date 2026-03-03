@@ -43,8 +43,6 @@ export default (env = {}, argv) => {
 
   const config = {
     mode: isProduction ? "production" : "development",
-    // In 'bundle' mode, we bundle ONLY the game class
-    // In 'standalone' mode, we load the engine with the user's game
     entry: {
       app: path.resolve(__dirname, "src/bootstrap.ts"),
     },
@@ -52,15 +50,24 @@ export default (env = {}, argv) => {
       filename: "game.bundle.js",
       path: path.resolve(__dirname, "dist"),
       clean: true,
+      // Target older environments to ensure maximum compatibility in Android WebViews
+      environment: {
+        arrowFunction: false,
+        const: false,
+        destructuring: false,
+        forOf: false,
+        module: false,
+      },
     },
     optimization: {
       minimize: isProduction,
       minimizer: [
         new TerserPlugin({
           terserOptions: {
+            ecma: 5,
             keep_classnames: true,
             keep_fnames: true,
-            mangle: false, // Completely disable mangling for ancient WebViews
+            mangle: false, // Prevent vconsole/Svelte from crashing Android WebViews
           },
         }),
       ],
@@ -109,10 +116,10 @@ export default (env = {}, argv) => {
   };
 
   if (bundleMode === "standalone") {
+    // Only inline the BrickEngine menu logic.
+    // p5 remains external because index.html loads it globally before our bundle executes.
     delete config.externals["brick-engine-js"];
-    delete config.externals["p5"];
 
-    // Plugins only for standalone mode
     config.plugins.push(
       new HtmlWebpackPlugin({
         template: path.resolve(engineRoot, "dist/index.html"),
@@ -121,20 +128,15 @@ export default (env = {}, argv) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          // {
-          //   from: path.resolve(engineRoot, "dist/vendor/p5.min.js"),
-          //   to: "vendor/p5.min.js",
-          // },
+          {
+            from: path.resolve(engineRoot, "dist/vendor/p5.min.js"),
+            to: "vendor/p5.min.js",
+          },
           { from: path.resolve(engineRoot, "dist/css"), to: "css" },
           { from: path.resolve(engineRoot, "dist/images"), to: "images" },
           { from: path.resolve(engineRoot, "dist/sounds"), to: "sounds" },
           { from: path.resolve(engineRoot, "dist/fonts"), to: "fonts" },
           { from: path.resolve(engineRoot, "dist/docs"), to: "docs" },
-          // {
-          //   from: path.resolve(__dirname, "public/CNAME"),
-          //   to: "CNAME",
-          //   toType: "file",
-          // },
           {
             from: path.resolve(__dirname, "public/manifest.json"),
             to: "manifest.json",
