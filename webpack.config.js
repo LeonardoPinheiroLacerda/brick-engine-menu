@@ -121,10 +121,10 @@ export default (env = {}, argv) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          {
-            from: path.resolve(engineRoot, "dist/vendor/p5.min.js"),
-            to: "vendor/p5.min.js",
-          },
+          // {
+          //   from: path.resolve(engineRoot, "dist/vendor/p5.min.js"),
+          //   to: "vendor/p5.min.js",
+          // },
           { from: path.resolve(engineRoot, "dist/css"), to: "css" },
           { from: path.resolve(engineRoot, "dist/images"), to: "images" },
           { from: path.resolve(engineRoot, "dist/sounds"), to: "sounds" },
